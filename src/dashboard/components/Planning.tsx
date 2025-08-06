@@ -1,46 +1,63 @@
 import { useNavigate } from "@tanstack/react-router";
-import type { Event } from "../types";
+import { useQuery } from "@tanstack/react-query";
+import type { Planning } from "../../types";
 
-type EventProps = {
-  event: Event;
+type PlanningProps = {
+  planning: Planning;
 };
 
-const Event = ({ event }: EventProps) => {
+const Planning = ({ planning }: PlanningProps) => {
   const navigate = useNavigate();
 
   return (
     <div
-      onClick={() => navigate({ to: `/event/${event.id}` })}
+      onClick={() => navigate({ to: `/planning/${planning.id}` })}
       className="bg-gray-800 rounded-lg shadow p-4 mb-4 text-white cursor-pointer hover:bg-gray-700 active:bg-gray-600"
     >
-      <div className="font-bold text-lg mb-2">{event.name}</div>
+      <div className="font-bold text-lg mb-2">{planning.title}</div>
+      <div className="text-md mb-2">{planning.description}</div>
       <div className="text-sm">
-        Du {event.from} au {event.to}
+        Du {planning.dateStart} au {planning.dateEnd}
       </div>
     </div>
   );
 };
 
-const Planning = () => {
-  const initialState: { plannings: Array<Event> } = {
-    plannings: [
-      { id: 123, name: "Excursion US", from: "01/01", to: "09/01" },
-      { id: 124, name: "Séminaire truc", from: "02/02", to: "20/02" },
-      { id: 125, name: "Anniversaire Machin", from: "10/02", to: "10/02" },
-    ],
-  };
+const fetchPlannings = async (): Promise<Planning[]> => {
+  const res = await fetch("http://localhost:3000/plannings");
+  if (!res.ok) throw new Error("Erreur lors du chargement des plannings");
+
+  return await res.json();
+};
+
+const Plannings = () => {
+  const navigate = useNavigate();
+  const {
+    data: plannings,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["plannings"],
+    queryFn: fetchPlannings,
+  });
 
   return (
     <div className="p-4 rounded-lg shadow-md m-2 flex-1 bg-gray-900 h-full">
       <div className="text-3xl mb-4 text-center">Mes plannings</div>
-      <button className="bg-gray-800 rounded-lg shadow p-4 mb-4 text-white cursor-pointer hover:bg-gray-700 active:bg-gray-600">
+      <button
+        onClick={() => navigate({ to: "/new-planning" })}
+        className="bg-gray-800 rounded-lg shadow p-4 mb-4 text-white cursor-pointer hover:bg-gray-700 active:bg-gray-600"
+      >
         + Créer un planning
       </button>
-      {initialState.plannings.map((event) => (
-        <Event event={event} />
-      ))}
+      {isLoading && <div className="text-white">Chargement...</div>}
+      {error && <div className="text-red-400">{(error as Error).message}</div>}
+      {plannings &&
+        plannings.map((planning: Planning) => (
+          <Planning key={planning.id} planning={planning} />
+        ))}
     </div>
   );
 };
 
-export default Planning;
+export default Plannings;

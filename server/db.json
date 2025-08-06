@@ -1,0 +1,85 @@
+{
+  "plannings": [
+    {
+      "id": "123",
+      "title": "Excursion US",
+      "description": "Petite balade aux US",
+      "dateStart": "2023-10-01T10:00:00Z",
+      "dateEnd": "2023-10-01T12:00:00Z",
+      "users": [
+        {
+          "email": "d.julien78@gmail.com",
+          "id": "Julien"
+        },
+        {
+          "email": "d.julien78@gmail.com",
+          "id": "Julien"
+        }
+      ],
+      "events": [
+        {
+          "id": "event1",
+          "title": "Event 1",
+          "description": "Description of Event 1",
+          "dateStart": "2023-10-01T10:00:00Z",
+          "dateEnd": "2023-10-01T12:00:00Z",
+          "location": "Location 1",
+          "participants": [
+            "user1",
+            "user2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "124",
+      "title": "Séminaire truc",
+      "description": "Avec la boîte",
+      "dateStart": "2023-10-01T10:00:00Z",
+      "dateEnd": "2023-10-01T12:00:00Z",
+      "users": [],
+      "events": [
+        {
+          "id": "event1",
+          "title": "Event 1",
+          "description": "Description of Event 1",
+          "dateStart": "2023-10-01T10:00:00Z",
+          "dateEnd": "2023-10-01T12:00:00Z",
+          "location": "Location 1",
+          "participants": [
+            "user1",
+            "user2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "125",
+      "title": "Anniversaire Machin",
+      "description": "Acheter un beau kdo",
+      "dateStart": "2023-10-01T10:00:00Z",
+      "dateEnd": "2023-10-01T12:00:00Z",
+      "users": [],
+      "events": [
+        {
+          "id": "event1",
+          "title": "Event 1",
+          "description": "Description of Event 1",
+          "dateStart": "2023-10-01T10:00:00Z",
+          "dateEnd": "2023-10-01T12:00:00Z",
+          "location": "Location 1",
+          "participants": [
+            "user1",
+            "user2"
+          ]
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "email": "d.julien78@gmail.com",
+      "id": "Julien"
+    }
+  ]
+}

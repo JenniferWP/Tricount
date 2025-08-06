@@ -8,9 +8,9 @@ import {
   Navigate,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-
 import Dashboard from "./dashboard/index.tsx";
-import Event from "./dashboard/components/Event.tsx";
+import PlanningDashboard from "./planning-dashboard";
+import NewPlanning from "./new-planning";
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -34,16 +34,23 @@ const dashboardRoute = createRoute({
   component: () => <Dashboard />,
 });
 
-const eventRoute = createRoute({
+const planningDashboardRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/event/$id",
-  component: () => <Event />,
+  path: "/planning/$id",
+  component: () => <PlanningDashboard />,
+});
+
+const newEventRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/new-planning",
+  component: () => <NewPlanning />,
 });
 
 const routeTree = rootRoute.addChildren([
   indexRoute,
   dashboardRoute,
-  eventRoute,
+  planningDashboardRoute,
+  newEventRoute,
 ]);
 
 const router = createRouter({ routeTree });
